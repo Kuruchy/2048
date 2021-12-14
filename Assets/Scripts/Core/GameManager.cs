@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using DG.Tweening;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 using Random = UnityEngine.Random;
 
 namespace Core {
@@ -219,5 +220,7 @@ namespace Core {
         }
 
         private Node GetNodeAtPosition(Vector2 pos) => _nodes.FirstOrDefault(n => n.Pos == pos);
+
+        public static void RestartScene() => SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
     }
 }
