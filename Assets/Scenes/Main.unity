@@ -444,7 +444,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &626657496
 RectTransform:
   m_ObjectHideFlags: 0
@@ -931,6 +931,14 @@ PrefabInstance:
       propertyPath: source
       value: 
       objectReference: {fileID: 424322494}
+    - target: {fileID: 5415268375763384920, guid: 1c914085879cbac4aa3108460cd4a296, type: 3}
+      propertyPath: winClip
+      value: 
+      objectReference: {fileID: 8300000, guid: 8f0c23dbac836f045b032daae9ba2236, type: 3}
+    - target: {fileID: 5415268375763384920, guid: 1c914085879cbac4aa3108460cd4a296, type: 3}
+      propertyPath: loseClip
+      value: 
+      objectReference: {fileID: 8300000, guid: 6bcf5370004de2e42a5e9dde2312978a, type: 3}
     - target: {fileID: 5415268375763384920, guid: 1c914085879cbac4aa3108460cd4a296, type: 3}
       propertyPath: winScreen
       value: 

@@ -23,6 +23,8 @@ namespace Core {
         [SerializeField] private GameObject winScreenText;
         [SerializeField] private AudioClip[] moveClips;
         [SerializeField] private AudioClip[] matchClips;
+        [SerializeField] private AudioClip winClip;
+        [SerializeField] private AudioClip loseClip;
         [SerializeField] private AudioSource source;
 
         private List<Node> _nodes;
@@ -52,9 +54,11 @@ namespace Core {
                     break;
                 case GameState.Win:
                     winScreen.SetActive(true);
+                    source.PlayOneShot(winClip);
                     Invoke(nameof(DelayedWinScreenText), 1.5f);
                     break;
                 case GameState.Lose:
+                    source.PlayOneShot(loseClip);
                     loseScreen.SetActive(true);
                     break;
                 default:
