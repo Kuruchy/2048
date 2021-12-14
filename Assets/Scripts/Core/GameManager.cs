@@ -72,13 +72,41 @@ namespace Core {
 
         private void Update() {
             if (_state != GameState.WaitingInput) return;
-
+#if UNITY_ANDROID
+            switch (SwipeManager.Direction) {
+                case Swipes.None:
+                    break;
+                case Swipes.Up:
+                    Shift(Vector2.up);
+                    break;
+                case Swipes.Down:
+                    Shift(Vector2.down);
+                    break;
+                case Swipes.Left:
+                    Shift(Vector2.left);
+                    break;
+                case Swipes.TopLeft:
+                    break;
+                case Swipes.BottomLeft:
+                    break;
+                case Swipes.Right:
+                    Shift(Vector2.right);
+                    break;
+                case Swipes.TopRight:
+                    break;
+                case Swipes.BottomRight:
+                    break;
+                default:
+                    throw new ArgumentOutOfRangeException();
+            }
+#else            
             if (Input.GetKeyDown(KeyCode.LeftArrow)) Shift(Vector2.left);
             if (Input.GetKeyDown(KeyCode.RightArrow)) Shift(Vector2.right);
             if (Input.GetKeyDown(KeyCode.UpArrow)) Shift(Vector2.up);
             if (Input.GetKeyDown(KeyCode.DownArrow)) Shift(Vector2.down);
+#endif
         }
-
+            
         private void GenerateGrid() {
             _round = 0;
             _nodes = new List<Node>();
