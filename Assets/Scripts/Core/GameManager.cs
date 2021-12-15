@@ -4,6 +4,7 @@ using System.Linq;
 using DG.Tweening;
 using UnityEngine;
 using UnityEngine.SceneManagement;
+using UnityEngine.UI;
 using Random = UnityEngine.Random;
 
 namespace Core {
@@ -79,12 +80,15 @@ namespace Core {
                     break;
                 case Swipes.Up:
                     Shift(Vector2.up);
+                    SwipeManager.Clear();
                     break;
                 case Swipes.Down:
                     Shift(Vector2.down);
+                    SwipeManager.Clear();
                     break;
                 case Swipes.Left:
                     Shift(Vector2.left);
+                    SwipeManager.Clear();
                     break;
                 case Swipes.TopLeft:
                     break;
@@ -92,6 +96,7 @@ namespace Core {
                     break;
                 case Swipes.Right:
                     Shift(Vector2.right);
+                    SwipeManager.Clear();
                     break;
                 case Swipes.TopRight:
                     break;
