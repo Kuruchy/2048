@@ -80,4 +80,6 @@ MonoBehaviour:
   winScreenText: {fileID: 0}
   moveClips: []
   matchClips: []
+  winClip: {fileID: 0}
+  loseClip: {fileID: 0}
   source: {fileID: 0}

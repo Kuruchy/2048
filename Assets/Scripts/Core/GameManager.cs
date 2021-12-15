@@ -4,7 +4,6 @@ using System.Linq;
 using DG.Tweening;
 using UnityEngine;
 using UnityEngine.SceneManagement;
-using UnityEngine.UI;
 using Random = UnityEngine.Random;
 
 namespace Core {
@@ -23,6 +22,7 @@ namespace Core {
         [SerializeField] private GameObject winScreen;
         [SerializeField] private GameObject loseScreen;
         [SerializeField] private GameObject winScreenText;
+        [SerializeField] private GameObject replayButton;
         [SerializeField] private AudioClip[] moveClips;
         [SerializeField] private AudioClip[] matchClips;
         [SerializeField] private AudioClip winClip;
@@ -70,6 +70,7 @@ namespace Core {
 
         private void DelayedWinScreenText() {
             winScreenText.SetActive(true);
+            replayButton.SetActive(true);
         }
 
         private void Update() {
@@ -105,14 +106,14 @@ namespace Core {
                 default:
                     throw new ArgumentOutOfRangeException();
             }
-#else            
+#else
             if (Input.GetKeyDown(KeyCode.LeftArrow)) Shift(Vector2.left);
             if (Input.GetKeyDown(KeyCode.RightArrow)) Shift(Vector2.right);
             if (Input.GetKeyDown(KeyCode.UpArrow)) Shift(Vector2.up);
             if (Input.GetKeyDown(KeyCode.DownArrow)) Shift(Vector2.down);
 #endif
         }
-            
+
         private void GenerateGrid() {
             _round = 0;
             _nodes = new List<Node>();
@@ -194,6 +195,7 @@ namespace Core {
             sequence.OnComplete(
                 () => {
                     var mergeBlocks = orderedBlocks.Where(b => b.mergingBlock != null).ToList();
+                    
                     foreach (var block in mergeBlocks) {
                         MergeBlocks(block.mergingBlock, block);
                     }
