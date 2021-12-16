@@ -6,5 +6,6 @@ namespace Core {
     public struct BlockType {
         public int value;
         public Color color;
+        public Color shadow;
     }
 }

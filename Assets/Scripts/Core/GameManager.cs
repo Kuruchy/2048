@@ -205,7 +205,7 @@ namespace Core {
             var newValue = baseBlock.value * 2;
 
             //Instantiate(mergeEffectPrefab, baseBlock.Pos, Quaternion.identity);
-            //Instantiate(floatingTextPrefab, baseBlock.Pos, Quaternion.identity).Init(newValue);
+            Instantiate(floatingTextPrefab, baseBlock.Pos, Quaternion.identity).Init(newValue);
 
             SpawnBlock(baseBlock.node, newValue);
 

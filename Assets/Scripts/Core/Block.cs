@@ -9,10 +9,12 @@ namespace Core {
         public bool merging;
         public Vector2 Pos => transform.position;
         [SerializeField] private SpriteRenderer spriteRenderer;
+        [SerializeField] private SpriteRenderer shadowSpriteRenderer;
         [SerializeField] private TextMeshPro text;
         public void Init(BlockType type) {
             value = type.value;
             spriteRenderer.color = type.color;
+            shadowSpriteRenderer.color = type.shadow;
             text.text = type.value.ToString();
         }
 
