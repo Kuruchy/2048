@@ -91,17 +91,9 @@ namespace Core {
                     Shift(Vector2.left);
                     SwipeManager.Clear();
                     break;
-                case Swipes.TopLeft:
-                    break;
-                case Swipes.BottomLeft:
-                    break;
                 case Swipes.Right:
                     Shift(Vector2.right);
                     SwipeManager.Clear();
-                    break;
-                case Swipes.TopRight:
-                    break;
-                case Swipes.BottomRight:
                     break;
                 default:
                     throw new ArgumentOutOfRangeException();

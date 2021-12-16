@@ -18,6 +18,7 @@ namespace Core {
 
         private void SwipeDetection() {
             if (Input.GetMouseButtonDown(0)) {
+                Clear();
                 _fingerStart = Input.mousePosition;
                 _fingerEnd = Input.mousePosition;
             }
@@ -27,33 +28,25 @@ namespace Core {
 
                 _currentSwipe = new Vector2(_fingerEnd.x - _fingerStart.x, _fingerEnd.y - _fingerStart.y);
 
-                // Make sure it was a legit swipe, not a tap
-                if (_currentSwipe.magnitude < minSwipeLength) {
-                    Direction = Swipes.None;
-                    return;
-                }
-
                 _angle = Mathf.Atan2(_currentSwipe.y, _currentSwipe.x) / Mathf.PI;
             }
 
+            // Make sure it was a legit swipe, not a tap
+            if (_currentSwipe.magnitude < minSwipeLength) {
+                Clear();
+                return;
+            }
+            
             if (!Input.GetMouseButtonUp(0)) return;
             
-            if (_angle > 0.375f && _angle < 0.625f) {
+            if (_angle > 0.25f && _angle < 0.75f) {
                 Direction = Swipes.Up;
-            } else if (_angle < -0.375f && _angle > -0.625f) {
+            } else if (_angle < -0.25f && _angle > -0.75f) {
                 Direction = Swipes.Down;
-            } else if (_angle < -0.875f || _angle > 0.875f) {
+            } else if (_angle < -0.75f || _angle > 0.75f) {
                 Direction = Swipes.Left;
-            } else if (_angle > -0.125f && _angle < 0.125f) {
+            } else if (_angle > -0.25f && _angle < 0.25f) {
                 Direction = Swipes.Right;
-            } else if (_angle > 0.125f && _angle < 0.375f) {
-                Direction = Swipes.TopRight;
-            } else if (_angle > 0.625f && _angle < 0.875f) {
-                Direction = Swipes.TopLeft;
-            } else if (_angle < -0.125f && _angle > -0.375f) {
-                Direction = Swipes.BottomRight;
-            } else if (_angle < -0.625f && _angle > -0.875f) {
-                Direction = Swipes.BottomLeft;
             }
         }
 

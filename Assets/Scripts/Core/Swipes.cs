@@ -4,10 +4,6 @@
         Up,
         Down,
         Left,
-        TopLeft,
-        BottomLeft,
-        Right,
-        TopRight,
-        BottomRight
+        Right
     }
 }
