@@ -134,12 +134,39 @@ namespace Core {
                 SpawnBlock(node, Random.value > 0.8f ? 4 : 2);
             }
 
-            if (freeNodes.Count() == 1) {
+            if (freeNodes.Count == 1 && !CanMerge()) {
                 ChangeState(GameState.Lose);
                 return;
             }
 
             ChangeState(_blocks.Any(b => b.value == winCondition) ? GameState.Win : GameState.WaitingInput);
+        }
+
+        private bool CanMerge() {
+            var canMerge = false;
+            var dirs = new List<Vector2> { Vector2.up, Vector2.down, Vector2.left, Vector2.right };
+
+            foreach (var dir in dirs) {
+                var orderedBlocks = _blocks.OrderBy(b => b.Pos.x).ThenBy(b => b.Pos.y).ToList();
+                if (dir == Vector2.right || dir == Vector2.up) orderedBlocks.Reverse();
+
+                foreach (var block in orderedBlocks) {
+                    var next = block.node;
+                    do {
+                        block.SetBlock(next);
+
+                        var possibleNode = GetNodeAtPosition(next.Pos + dir);
+                        if (possibleNode != null) {
+                            if (possibleNode.occupiedBlock != null &&
+                                possibleNode.occupiedBlock.CanMerge(block.value)) {
+                                canMerge = true;
+                            }
+                        }
+                    } while (next != block.node);
+                }
+            }
+
+            return canMerge;
         }
 
         private void SpawnBlock(Node node, int value) {
@@ -187,7 +214,7 @@ namespace Core {
             sequence.OnComplete(
                 () => {
                     var mergeBlocks = orderedBlocks.Where(b => b.mergingBlock != null).ToList();
-                    
+
                     foreach (var block in mergeBlocks) {
                         MergeBlocks(block.mergingBlock, block);
                     }
